@@ -1,0 +1,134 @@
+<div class="shadow p-5 col-md-12 col-10">
+
+<!-- Create UserRecord -->
+
+    <form #addForm = "ngForm"  (ngSubmit)="addUserRecord(addForm)">
+        <!-- <h4 class="text-center">Add Employee</h4> -->
+        <div class="alert alert-warning text-center"><span class="h5">Add Employee</span></div>
+        <div class="row">
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for="">File Number</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-list-ol"></i></span>
+                        <input type="text" class="form-control" ngModel name="fileNumber" placeholder="File Number" aria-label="Username"
+                            aria-describedby="basic-addon1" required >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for=""> Full Name</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control" ngModel name="name" placeholder="Full Name" aria-label="Username"
+                            aria-describedby="basic-addon1" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for="">Designation</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-briefcase"></i></span>
+                        <input type="text" class="form-control" ngModel name="designation" placeholder="Designation" aria-label="Username"
+                            aria-describedby="basic-addon1" required >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for="">Department</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-building"></i></span>
+                        <select class="form-select" aria-label="Default select example" ngModel="None" name="department">
+                            <option value="None" >None</option>
+                            <option *ngFor="let department of departments,let i=index" value="{{department.department}}">{{department.department}}</option>
+                          </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for="">Phone Number</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i
+                                class="fa-solid fa-mobile-screen-button"></i></span>
+                        <input type="text" class="form-control" ngModel name="phoneNumber" placeholder="Phone Number" aria-label="Username"
+                            aria-describedby="basic-addon1" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for="">Location</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-location-dot"></i></span>
+                        <select class="form-select" aria-label="Default select example" ngModel="Mussaffah" name="location">
+                            <option value="Mussaffah" >Mussaffah</option>
+                            <option value="Jebel Ali">Jebel Ali</option>
+                          </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for="">Email Address</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="text" class="form-control" ngModel name="email" placeholder="Email Address" aria-label="Username"
+                            aria-describedby="basic-addon1" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3 col-12">
+                    <label for="">Password</label>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" class="form-control"ngModel name="password" placeholder="Password" aria-label="Username"
+                            aria-describedby="basic-addon1" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="text-end mt-3 mb-2">
+                    <button [disabled]="addForm.invalid" type="submit" id="addUser" class="btn btn-dark">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <!-- End of Create UserRecord -->
+
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

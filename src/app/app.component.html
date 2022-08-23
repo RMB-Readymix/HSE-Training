@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark p-3">
+  <div class="container-fluid">
+    <a href="" class="navbar-brand"><i class="fa-solid fa-2x fa-helmet-safety text-center"></i>&nbsp;&nbsp;<span
+        class="h3">RMB HSE</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="authenticatedOrNot == false">
+          <a class="nav-link" href="" routerLink="/login">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+  <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+  </div>
+</ngx-spinner>

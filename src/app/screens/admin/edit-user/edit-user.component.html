@@ -1,0 +1,339 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<!-- Employee Search -->
+
+<div class="row col-md-4 offset-md-8 col-8 offset-3">
+    <div class="input-group">
+        <input type="search" #key="ngModel" ngModel (ngModelChange)="searchUserRecords(key.value)" name="key" id="form1"
+            class="form-control " placeholder="Search Employee Here....."/>
+        <button type="button" class="btn btn-dark shadow">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</div>
+
+<!-- End of Employee Search -->
+
+
+<div id="main-container">
+
+    <!-- Find Employees -->
+
+    <div class="row mt-3 col-10 col-md-12">
+        <div class="col-md-4 col-12">
+            <select #findByDropdownValue name="dropdown" class="form-select">
+                <option value="find by all" selected>Find by all</option>
+                <option value="find by department">Find by department</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 col-12">
+            <select #departmentDropdownValue class="form-select" name="dropdown">
+                <option selected>None</option>
+                <option *ngFor="let department of departments,let i=index" value="{{department.department}}">
+                    {{department.department}}</option>
+            </select>
+        </div>
+        <div class="col-md-2 offset-md-0 col-10 offset-2">
+            <button type="button" class="btn btn-dark cust-btn1 shadow"
+                (click)="setvalues(departmentDropdownValue,findByDropdownValue)">Get Results</button>
+        </div>
+        <div class="col-md-2 offset-md-0 col-10 offset-2">
+            <button type="button" class="btn btn-success cust-btn2 shadow" routerLink="/admin/user-config">Add
+                Employees</button>
+        </div>
+    </div>
+
+    <!-- End of Find Employees -->
+
+    <!-- No EMployees Message -->
+
+    <div class="row mt-3">
+        <div class="col-md-12 col-11 text-center">
+            <div *ngIf="userRecords.length <= 0">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">NO RECORDS WERE SELECTED!</h4>
+                    <p>Please Select Employees to Configure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- No EMployees Message -->
+
+    <div class="" *ngIf="userRecords.length > 0">
+
+        <!-- Get User Records -->
+
+        <div class="row mt-5 col-md-12 col-10 ">
+            <div style="overflow-x:scroll;">
+                <table class="table align-middle mb-0 bg-white">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>File.No</th>
+                            <th>Name</th>
+                            <th>Designation</th>
+                            <th>Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="userRecords.length > 0">
+                        <tr *ngFor="let userRecord of userRecords">
+                            <td>
+                                {{userRecord.fileNumber}}
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <p class="fw-bold mb-1">{{userRecord.name}}</p>
+                                        <p class="text-muted mb-0">{{userRecord.email}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{{userRecord.designation}}</p>
+                                <p class="text-muted mb-0">{{userRecord.department}}</p>
+                            </td>
+                            <td>
+                                {{userRecord.location}}
+                            </td>
+                            <td>
+                                <button (click)="onOpenModal('update',userRecord)"
+                                    class="btn btn-sm btn-primary btn-rounded shadow">
+                                    <i class="fas fa-edit text-white"></i>
+                                </button>
+                                &nbsp;
+                                <button (click)="onOpenModal('delete',userRecord)"
+                                    class="btn btn-sm btn-danger btn-rounded shadow">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-end">
+                    <nav aria-label="Page navigation example" class="mt-4">
+                        <ul class="pagination" style="float: right">
+                            <li *ngIf="pageIndex === 0" class="page-item disabled">
+                                <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li *ngIf="pageIndex > 0" (click)="changePage('Previous')" class="page-item ">
+                                <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+
+                            <li class="page-item"><a class="page-link">{{pageIndex + 1}}</a></li>
+
+                            <li *ngIf="userRecords.length === 10" (click)="changePage('Next')" class="page-item">
+                                <a class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+
+                            <li *ngIf="userRecords.length < 10 " class="page-item disabled">
+                                <a class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- End of Get User Records -->
+
+        <!-- Update User Records -->
+
+        <div class="modal fade" id="updateUserRecordsModal" tabindex="-1" aria-labelledby="DELETEModalLabel"
+            aria-hidden="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                            <input type="hidden" name="id" ngModel="{{updateUserRecords?.id}}" class="form-control"
+                                id="id" placeholder="Email">
+                            <h4 class="text-center">Edit Employee <b>{{updateUserRecords?.name}}</b></h4>
+                            <div class="row">
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for="">File Number</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fa-solid fa-list-ol"></i></span>
+                                            <input type="text" class="form-control"
+                                                ngModel="{{updateUserRecords?.fileNumber}}" name="fileNumber"
+                                                placeholder="File Number" aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for=""> Full Name</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa-solid fa-user"></i></span>
+                                            <input type="text" class="form-control"
+                                                ngModel="{{updateUserRecords?.name}}" name="name"
+                                                placeholder="Full Name" aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for="">Designation</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa-solid fa-briefcase"></i></span>
+                                            <input type="text" class="form-control"
+                                                ngModel="{{updateUserRecords?.designation}}" l name="designation"
+                                                placeholder="Designation" aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for="">Department</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa-solid fa-building"></i></span>
+                                            <select #departmentDropdownValue class="form-select"  name="department" ngModel="{{updateUserRecords?.department}}">
+                                                <option *ngFor="let department of departments,let i=index"
+                                                    value="{{department.department}}">{{department.department}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for="">Phone Number</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa-solid fa-mobile-screen-button"></i></span>
+                                            <input type="text" class="form-control"
+                                                ngModel="{{updateUserRecords?.phoneNumber}}" name="phoneNumber"
+                                                placeholder="Phone Number" aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for="">Location</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa-solid fa-location-dot"></i></span>
+                                            <select class="form-select" aria-label="Default select example"
+                                                ngModel="{{updateUserRecords?.location}}" name="location">
+                                                <option value="Mussaffah">Mussaffah</option>
+                                                <option value="Jebel Ali">Jebel Ali</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for="">Email Address</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa-solid fa-envelope"></i></span>
+                                            <input type="text" class="form-control"
+                                                ngModel="{{updateUserRecords?.email}}" name="email"
+                                                placeholder="Email Address" aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-12">
+                                        <label for="">Password</label>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fa-solid fa-lock"></i></span>
+                                            <input type="password" class="form-control"
+                                                ngModel="{{updateUserRecords?.password}}" name="password"
+                                                placeholder="Password" aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary shadow" data-bs-dismiss="modal">Cancel</button>
+                        <button (click)="onUpdateUserRecords(editForm.value)" class="btn btn-success shadow"
+                            data-bs-dismiss="modal">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End of Update User Records -->
+
+        <!-- Delete User Records -->
+
+        <div class="modal fade" id="deleteUserRecordsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            Are you sure want to delete this user <b>"{{deleteUserRecords?.name}}"</b>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary shadow" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-danger shadow" data-bs-dismiss="modal"
+                            (click)="onDeleteUserRecord(deleteUserRecords!.id)"><i
+                                class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End of Delete User Records -->
+
+    </div>
+
+    <!-- Spinner Service -->
+
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+        <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+        </div>
+    </ngx-spinner>

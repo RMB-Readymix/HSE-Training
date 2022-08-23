@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 sticky-top">
+                <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Dashboard</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start "
+                    id="menu" >
+                    <li class="nav-item">
+                        <a routerLink="/admin/dashboard" class="nav-link align-middle px-0">
+                            <i class="fa-solid fa-house"></i> &nbsp;<span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/admin/edit-user" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fa-solid fa-user"></i>&nbsp;<span class="ms-1 d-none d-sm-inline"
+                                routerLinkActive="active">User Management</span> </a>
+                    </li>
+                    <li>
+                        <a class="nav-link px-0 align-middle" routerLink="/admin/course-conf">
+                            <i class="fa-solid fa-book"></i>&nbsp;<span class="ms-1 d-none d-sm-inline">Course Management</span></a>
+                    </li>
+                    <li>
+                        <a data-bs-toggle="collapse" class="nav-link px-0 align-middle " routerLink="/admin/task-conf">
+                            <i class="fa-solid fa-list-check"></i>&nbsp; <span class="ms-1 d-none d-sm-inline"> Task
+                                Management</span></a>
+                    </li>
+                    <li>
+                        <a data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fa-solid fa-file"></i> &nbsp;<span class="ms-1 d-none d-sm-inline">Training Plan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link px-0 align-middle">
+                            <i class="fa-solid fa-database"></i> &nbsp;<span
+                                class="ms-1 d-none d-sm-inline">Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link px-0 align-middle">
+                            <i class="fa-solid fa-house"></i> &nbsp;<span
+                                class="ms-1 d-none d-sm-inline">Resources</span> </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-10 p-5 col-xl-10">
+                <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

@@ -1,0 +1,154 @@
+<div class="shadow p-5 col-md-12 col-10">
+
+    <!-- Content & Preview Nav -->
+
+    <ul class="nav nav-tabs justify-content-center " id="myTab " role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><i
+                    class="fa-solid fa-align-justify"></i>&nbsp;Content</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><i
+                    class="fa-solid fa-eye"></i>&nbsp;Preview</button>
+        </li>
+    </ul>
+
+    <!--End of Content & Preview Nav -->
+
+    <br>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+            tabindex="0">
+            <div class="row">
+
+                <form [formGroup]="propertyFG" (ngSubmit)="onSubmit()">
+
+                    <!-- Title -->
+
+                    <div class="input-group card-text mb-3">
+                        <span class="input-group-text " id="basic-addon1"><b>Title</b></span>
+                        <input type="text" name="title" formControlName="title" required #title
+                            (keyup)="getTitleValue(title.value)" class="form-control" name="title"
+                            placeholder="Add title here...">
+                    </div>
+
+                    <!-- Title Description -->
+
+                    <div class="input-group card-text mb-3">
+                        <span class="input-group-text" id="basic-addon1"><b>Title <br> Description</b></span>
+                        <textarea class="form-control" formControlName="description" name="description" #description
+                            (keyup)="getDescriptionValue(description.value)"></textarea>
+                    </div>
+
+                    <!-- HeaderImage -->
+                    <div formArrayName="headerimage" *ngFor="let fg of headerImageArrayFGControls; let i = index">
+                        <div class="input-group card-text mb-3" [formGroup]="fg">
+                            <span class="input-group-text" id="basic-addon1"><b>Header Image</b></span>
+                            <input class="form-control" (change)="onHeaderChange($event)" formControlName="value"
+                                name="headerimage" #headerimage type="file">
+                        </div>
+                    </div>
+
+                    <!-- CK Editor -->
+
+                    <ckeditor [editor]="Editor" name="editor" formControlName="editor">
+                    </ckeditor>
+                    <br>
+
+                    <!-- Youtube -->
+
+                    <div class="input-group card-text mb-3">
+                        <span class="input-group-text" id="basic-addon1"><b>Youtube URL</b></span>
+                        <input type="text" name="youtube_url" formControlName="youtube_url"  
+                        class="form-control"
+                        placeholder="Add Youtube URL here...">
+                    </div>
+
+                    <!-- Images -->
+
+                    <div formArrayName="image" *ngFor="let fg of imageArrayFGControls; let i = index">
+                        <div class="input-group  card-text mb-3" [formGroup]="fg">
+                            <span class="input-group-text" id="basic-addon1" *ngIf="i==0"><b>Slider Images</b></span>
+                            <span class="input-group-text" id="basic-addon1" *ngIf="i>0">Slider Images {{i+1}}</span>
+                            <input class="form-control" (change)="onImageChange($event)" formControlName="value"
+                                name="image" type="file" id="formFile" multiple>
+                            <span class="input-group-text" *ngIf="i==0"><i class="fa-solid fa-plus"
+                                    (click)="addNewImageFG()"></i></span>
+                            <span class="input-group-text bg-success text-white" *ngIf="i>0"><i class="fa-solid fa-plus"
+                                    (click)="addNewImageFG()"></i></span>
+                            <span *ngIf="i>0" class="input-group-text bg-danger"><i class="fa-solid fa-trash text-white"
+                                    (click)="removeImageFG(i)"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Videos -->
+
+                    <div formArrayName="video" *ngFor="let fg of videoArrayFGControls; let i = index">
+                        <div class="input-group  card-text mb-3" [formGroup]="fg">
+                            <span class="input-group-text" id="basic-addon1" *ngIf="i==0"><b>Videos</b></span>
+                            <span class="input-group-text" id="basic-addon1" *ngIf="i>0"><b>Video {{i+1}}</b></span>
+                            <input class="form-control" (change)="onVideoChange($event)" formControlName="value"
+                                name="image" type="file" id="formFile" multiple>
+                            <span class="input-group-text" *ngIf="i==0"><i class="fa-solid fa-plus"
+                                    (click)="addNewVideoFG()"></i></span>
+                            <span class="input-group-text bg-success text-white" *ngIf="i>0"><i class="fa-solid fa-plus"
+                                    (click)="addNewVideoFG()"></i></span>
+                            <span *ngIf="i>0" class="input-group-text bg-danger"><i class="fa-solid fa-trash text-white"
+                                    (click)="removeVideoFG(i)"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Files -->
+
+                    <div formArrayName="file" *ngFor="let fg of fileArrayFGControls; let i = index">
+                        <div class="input-group  card-text mb-3" [formGroup]="fg">
+                            <span class="input-group-text" id="basic-addon1" *ngIf="i==0"><b>Files</b></span>
+                            <span class="input-group-text" id="basic-addon1" *ngIf="i>0">File {{i+1}}</span>
+                            <input class="form-control" (change)="onFileChange($event)" formControlName="value"
+                                name="image" type="file" id="formFile" multiple>
+                            <span class="input-group-text" *ngIf="i==0"><i class="fa-solid fa-plus"
+                                    (click)="addNewFileFG()"></i></span>
+                            <span class="input-group-text bg-success text-white" *ngIf="i>0"><i class="fa-solid fa-plus"
+                                    (click)="addNewFileFG()"></i></span>
+                            <span *ngIf="i>0" class="input-group-text bg-danger"><i class="fa-solid fa-trash text-white"
+                                    (click)="removeFileFG(i)"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+
+                    <div class="text-end ">
+                        <button type="submit" [disabled]="!propertyFG.valid" class="btn btn-success cust-btn"
+                            id="addContent">Save</button>
+                        <!-- <button class="btn btn-secondary cust-btn" routerLink="/admin/course-edit">Create
+                            Questionnaire</button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Fetch Value -->
+
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <div class="heading" *ngIf="titleValue">
+                <h1 class="text-center font-weight-bold" *ngIf="titleValue">{{titleValue}}</h1>
+                <p *ngIf="descriptionValue" class="text-center">{{descriptionValue}}</p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <img [src]="headerImageValue" class="d-block w-100" alt="">
+                    <div class="col-md-12 mt-3">
+                        <div class="ck-content" [innerHtml]="editorValue"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

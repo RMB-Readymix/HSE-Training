@@ -1,0 +1,109 @@
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<!-- <div class="shadow p-3 col-md-12 col-10">
+   Under Development
+</div> -->
+<form #addForm="ngForm" (ngSubmit)="addTaskRecord(addForm)">
+   <div class="row">
+      <div class="alert alert-secondary p-3 text-center" role="alert">
+         <div class="row">
+            <div class="col-md-4">
+               <h4 class="text-muted">Selected Course : {{selectedCourseList.length}} </h4>
+               <button *ngFor="let item of selectedCourseList" type="button"
+                  class="btn btn-outline-success col-md-5 mt-1 m-1">{{item.title}}</button>&nbsp;
+            </div>
+            <div class="col-md-4">
+               <h4 class="text-muted">Selected User : {{selectedUserList.length}} </h4>
+               <button *ngFor="let item of selectedUserList" type="button"
+                  class="btn btn-outline-danger col-md-5ng mt-1 m-1">{{item.fileNumber}} - {{item.name}}</button><br>
+            </div>
+            <div class="col-md-4">
+               <div class="row">
+                  <h4 class="text-muted">Select Completion Date</h4>
+                  <div class="col-md-6 offset-md-3">
+                     <input type="date" class="form-control" name="endDate" ngModel required>
+                     <input type="date" name="assignedDate" hidden [ngModel]="myDates">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6  p-3 text-center">
+         <div class="card mb-2">
+            <div class="card-header alert-success ">
+               <h5>Choose Course Here</h5>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6 offset-md-6 mb-1">
+               <div class="input-group">
+                  <input type="search" id="form1" class="form-control" placeholder="Search Courses Here...."
+                     #key="ngModel" ngModel (ngModelChange)="searchCourseRecords(key.value)" name="key" />
+                  <button type="button" class="btn btn-dark shadow">
+                     <i class="fas fa-search"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+         <div class="card mt-1 shadow border border-success" *ngFor="let course of contentRecords">
+            <li class="list-group-item p-3">
+               <div class="row">
+                  <input type="hidden" name="courseId" ngModel="{{course.id}}" class="form-control">
+                  <input type="hidden" name="taskStatus" ngModel="Assigned" class="form-control">
+                  <div class="col-md-1">
+                     <input class="form-check-input me-1" type="checkbox" [(ngModel)]="course.isChecked"
+                        (change)="changeCourseSelection()" name="courseName" required>
+                  </div>
+                  <div class="col-md-11">
+                     <label class="form-check-label" for="firstCheckbox">{{course.title}}</label>
+                  </div>
+               </div>
+            </li>
+         </div>
+      </div>
+
+
+      <div class="col-md-6  p-3 text-center">
+         <div class="card mb-2">
+            <div class="card-header alert-danger ">
+               <h5>Choose Employee Here</h5>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6 offset-md-6 mb-1">
+               <div class="input-group">
+                  <input type="search" id="form1" class="form-control" placeholder="Search Users Here...."
+                     #key="ngModel" ngModel (ngModelChange)="searchUserRecords(key.value)" name="keyuser" />
+                  <button type="button" class="btn btn-dark shadow">
+                     <i class="fas fa-search"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+         <div class="card mt-1 shadow border border-danger" *ngFor="let user of userRecords">
+            <li class="list-group-item p-3">
+               <div class="row">
+                  <input type="hidden" name="employeeId" ngModel="{{user.id}}" class="form-control">
+                  <input type="hidden" name="employeeEmail" ngModel="{{user.email}}" class="form-control">
+                  <div class="col-md-1">
+                     <input class="form-check-input me-1" type="checkbox" ngModel="{{user.name}}"
+                        [(ngModel)]="user.isChecked" name="employeeName" (change)="changeUsersSelection()" required>
+                  </div>
+                  <div class="col-md-11">
+                     <label class="form-check-label" for="firstCheckbox">{{user.name}}</label>
+                  </div>
+               </div>
+            </li>
+         </div>
+      </div>
+      <div class="text-end">
+         <button class="btn btn-success cust-btn" [disabled]="addForm.invalid">Next</button>
+      </div>
+   </div>
+</form>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+   <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+   </div>
+</ngx-spinner>

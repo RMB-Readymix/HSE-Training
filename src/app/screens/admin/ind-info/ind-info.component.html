@@ -1,0 +1,57 @@
+<div id="main-container">
+    <div class="alert text-center alert-warning"> <span class="h5 bold font-weight-bold">Task Management </span> </div>
+    <div class="alert text-center alert-secondary" *ngIf="taskRecords == 0"> <span class="h5 bold font-weight-bold">No
+            Assigned Tasks Found..!</span> </div>
+    <table class="table">
+        <thead class="table-dark" *ngIf="taskRecords.length > 0">
+            <tr>
+                <th scope="col">Sl.No</th>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Assingned Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of taskRecords, let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{task.employeeName}}</td>
+                <td>{{task.courseName}}</td>
+                <td><span class="badge bg-success">{{task.taskStatus}}</span></td>
+                <td>{{task.assignedDate}}</td>
+                <td>{{task.endDate}}</td>
+                <td>
+                    <button (click)="onOpenModal('delete',task)" class="btn btn-danger btn-sm rounded-circle shadow"><i
+                            class="fas fa-trash text-white"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button style="width:100%;" class="btn btn-success" printSectionId="print-section" ngxPrin printTitle="Task Report">Print Report</button>
+</div>
+
+<div class="modal fade" id="deleteTaskRecordsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="mb-3">
+                    Are you sure want to delete this ?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary shadow" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-danger shadow" data-bs-dismiss="modal"
+                    (click)="onDeleteUserRecord(deleteTaskRecords!.id)"><i
+                        class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

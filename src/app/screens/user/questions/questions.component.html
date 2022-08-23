@@ -1,0 +1,54 @@
+<!-- questionnaire -->
+<div class="container">
+
+    <div class="row">
+        <div class="text-end">
+            <button class="btn btn-danger "><i class="fa-solid fa-clock"></i>&nbsp; {{minutesLeft}}:{{secondsLeft}}</button>
+        </div>
+        <!-- <button (click)='startTimer()' class="btn btn-success">Start Timer</button> -->
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div *ngFor="let qrecord of qrecords,let i=index">
+            <div *ngIf="qrecord.content_id == contentRecords.id">
+                {{contentRecords.length}}
+                <div class="card border-success cust-card shadow mt-2">
+                    <h5 class="card-header bg-success text-white"> <i
+                            class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;{{qrecord?.question}}
+                    </h5>
+                    <div class="card-body">
+                        <ul class="list-group ">
+                            <li class="list-group-item ">
+                                <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">&nbsp;
+                                <label class="form-check-label" for="firstCheckbox">{{qrecord?.choice1}}</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">&nbsp;
+                                <label class="form-check-label" for="secondCheckbox">{{qrecord?.choice2}}</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">&nbsp;
+                                <label class="form-check-label" for="thirdCheckbox">{{qrecord?.choice3}}</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">&nbsp;
+                                <label class="form-check-label" for="thirdCheckbox">{{qrecord?.choice3}}</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-end mt-2 mb-2">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit
+                Your Answer</button>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

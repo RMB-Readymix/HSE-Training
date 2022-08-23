@@ -1,0 +1,157 @@
+<section>
+    <div class="py-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <h5></h5>
+                <div class="card mb-4 shadow">
+                    <div class="card-body">
+                        <div class="text-end">
+                            <button class="btn btn-primary shadow text-end mb-3" (click)="edit()">Edit</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">File Number</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input width="100%" class="form-control" readonly placeholder="{{userData.fileNumber}}">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input width="100%" class="form-control" readonly placeholder="{{userData.name}}">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input width="100%" class="form-control" readonly placeholder="{{userData.email}}">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Designation</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input width="100%" class="form-control" readonly
+                                    placeholder="{{userData.designation}}">
+                            </div>
+                        </div>
+                        <hr >
+
+                        <!-- Department -->
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Department</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input width="100%" class="form-control" readonly placeholder="{{userData.department}}">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone Number</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input style="width:100%" class="form-control" readonly
+                                    placeholder="{{userData.phoneNumber}}">
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row" *ngIf="isEditable">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone Number</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input style="width:100%" [(ngModel)]="phNumber" class="form-control"
+                                    placeholder="{{userData.phoneNumber}}">
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+
+                        <div class="row" *ngIf="!isEditable">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Location</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input style="width:100%" class="form-control" readonly
+                                    placeholder="{{userData.location}}">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row" *ngIf="isEditable">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Location</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="location" style="width:100%" class="form-control"
+                                    placeholder={{userData.location}}>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+
+                        <div class="row" *ngIf="!isEditable">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Password</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input style="width:100%" class="form-control" readonly type="password"
+                                    placeholder="{{userData.password}}">
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row" *ngIf="isEditable">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Password</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="password" style="width:100%" class="form-control" type="password"
+                                    placeholder="{{userData.password}}">
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="isEditable && isEditingPassword">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Password</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="confirmPassword" style="width: 100%;" class="form-control"
+                                    type="password" (keyup)="checkPassword()" placeholder={{userData.password}}>
+                                <p style="color: red;font-size: 12px;">{{errorMessage}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="isEditable">
+                            <div class="col text-end mt-3">
+                                <button class="btn btn-secondary" mat-raised-button color="warn" (click)="edit()">Cancel</button> &nbsp;
+                                <button class="btn btn-success" (click)="update()">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

@@ -1,0 +1,19 @@
+<!-- Content Record Details -->
+
+<div class="row mt-5 text-center">
+    <div class="col-md-3" *ngFor="let task of taskRecords">
+        <div *ngFor="let contents  of contentRecords">
+            <div *ngIf="contents.id == task.courseId">
+                <div class="shadow p-5 bg-white border border-warning border-2 rounded mb-5"
+                    (click)="getContentRecordDetails(contents.id)">{{contents.title}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End of Content Record Details -->
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

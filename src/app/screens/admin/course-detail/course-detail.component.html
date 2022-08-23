@@ -1,0 +1,267 @@
+<div class="row text-end">
+
+    <!-- Create new Qesution -->
+
+    <div class="col-md-6 offset-md-6 col-10">
+        <button type="button" class="btn btn-success text-center cust-btn"
+            (click)="getContentRecordDetails(contentRecords.id)">
+            <i class="fa-solid fa-plus"></i>&nbsp;&nbsp; Create New
+            Question</button>
+    </div>
+
+    <!-- End of Create New Qesution -->
+
+    <!-- Search Questions -->
+
+    <div class="col-md-6 offset-md-6 col-10 mt-2" *ngIf="qrecords?.length>0">
+        <div class="col-md-8 offset-4">
+            <div class="input-group">
+                <input type="search" #key="ngModel" ngModel (ngModelChange)="searchqRecords(key.value)" name="key"
+                    class="form-control" placeholder="Search for Questions Here....." required>
+                <button type="button" class="btn btn-dark shadow">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of Search Questions -->
+
+</div>
+
+<!-- No Questions Message -->
+
+<div class="row mt-3">
+    <div class="col-md-12  col-11 text-center">
+        <div *ngIf="qrecords?.length == 0">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">NO QUESTIONS!</h4>
+                <p>No Questions were found.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- No Questions Message -->
+
+<div id="main-container">
+
+    <!-- Get Question Record -->
+
+    <div class="shadow mt-3 col-md-12 col-10 " *ngFor="let qrecord of qrecords,let i=index">
+
+        <div class="accordion accordion-flush" id="accordionFlushExample{{i}}">
+            <div>
+                <div *ngIf="qrecord.content_id == contentRecords.id">
+                    <div class="accordion-item p-3">
+                        <h2 class="accordion-header" id="flush-headingOne{{i}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                attr.data-bs-target="#flush-collapseOne{{i}}" aria-expanded="false"
+                                attr.aria-controls="flush-collapseOne{{i}}">
+                                <i class="fa-solid fa-circle-question"></i>&nbsp;&nbsp;{{qrecord?.question}}
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne{{i}}" class="accordion-collapse collapse"
+                            attr.aria-labelledby="headingOne{{i}}" attr.data-bs-parent="#accordionFlushExample{{i}}">
+                            <div class="accordion-body">
+                                <div class="row p-3">
+                                    <div class="col-md-2 col-12">
+                                        <i class="fa-solid fa-circle-play"></i>&nbsp;
+                                        {{qrecord?.choice1}}
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <i class="fa-solid fa-circle-play"></i>&nbsp;
+                                        {{qrecord?.choice2}}
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <i class="fa-solid fa-circle-play"></i>&nbsp;
+                                        {{qrecord?.choice3}}
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <i class="fa-solid fa-circle-play"></i>&nbsp;
+                                        {{qrecord?.choice4}}
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <div class="row">
+                                            <div class="col-md-12 col-12" *ngIf="qrecord?.answer1">
+                                                <i class="fa-solid fa-circle-check" style="color: green;"></i>&nbsp;
+                                                {{qrecord?.answer1}}
+                                            </div>
+                                            <div class="col-md-12 col-12" *ngIf="qrecord?.answer2">
+                                                <i class="fa-solid fa-circle-check" style="color: green;"></i>&nbsp;
+                                                {{qrecord?.answer2}}
+                                            </div>
+                                            <div class="col-md-12 col-12" *ngIf="qrecord?.answer3">
+                                                <i class="fa-solid fa-circle-check" style="color: green;"></i>&nbsp;
+                                                {{qrecord?.answer3}}
+                                            </div>
+                                            <div class="col-md-12 col-12" *ngIf="qrecord?.answer4">
+                                                <i class="fa-solid fa-circle-check" style="color: green;"></i>&nbsp;
+                                                {{qrecord.answer4}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-12 ">
+                                        <button (click)="onOpenModal('update',qrecord)"
+                                            class="btn k btn-sm btn-primary btn-rounded shadow">
+                                            <i class="fas fa-edit text-white"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button (click)="onOpenModal('delete',qrecord)"
+                                            class="btn  btn-sm btn-danger btn-rounded shadow">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of Get Question Record -->
+
+    <!-- Update Question Record -->
+
+    <div class="modal fade" id="updateQuestionRecordsModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form #editForm="ngForm">
+                        <input type="hidden" name="id" ngModel="{{updateqrecords?.id}}" class="form-control" id="id"
+                            placeholder="Email">
+                        <input type="hidden" name="content_id" ngModel="{{updateqrecords?.content_id}}" class="form-control"
+                            id="id" placeholder="Email">
+                        <div class="mb-3">
+                            <div class="card text-center">
+                                <div class="card-header p-3">
+                                    Edit Your Question <b> {{updateqrecords?.question}} </b>
+                                </div>
+                                <div class="card-body p-5">
+                                    <h5 class="card-title">Question</h5>
+                                    <div class="input-group card-text mb-3">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fa-solid fa-circle-question"></i></span>
+                                        <input type="text" class="form-control" ngModel="{{updateqrecords?.question}}"
+                                            name="question" required placeholder="Question">
+                                    </div>
+                                    <h5 class="card-title">Choices</h5>
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="input-group card-text mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class="fa-solid fa-circle-play"></i></span>
+                                                <input type="text" class="form-control"
+                                                    ngModel="{{updateqrecords?.choice1}}" name="choice1" required
+                                                    placeholder="Choice 1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group card-text mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class="fa-solid fa-circle-play"></i></span>
+                                                <input type="text" class="form-control"
+                                                    ngModel="{{updateqrecords?.choice2}}" name="choice2" required
+                                                    placeholder="Choice 2">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group card-text mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class="fa-solid fa-circle-play"></i></span>
+                                                <input type="text" class="form-control"
+                                                    ngModel="{{updateqrecords?.choice3}}" name="choice3" required
+                                                    placeholder="Choice 3">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group card-text mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class="fa-solid fa-circle-play"></i></span>
+                                                <input type="text" class="form-control"
+                                                    ngModel="{{updateqrecords?.choice4}}" name="choice4" required
+                                                    placeholder="Choice 4">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="card-title">Answer</h5>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                            <div class="form-check form-check-inline"
+                                                ngModel="{{updateqrecords?.answer1}}">
+                                                <input class=" form-check-input" ngModel name="answer1" type="checkbox"
+                                                    [checked]="updateqrecords?.answer1">
+                                                <label class="form-check-label">Choice 1</label>
+                                            </div>
+                                            <div class="form-check form-check-inline"
+                                                ngModel="{{updateqrecords?.answer2}}">
+                                                <input class="form-check-input" ngModel name="answer2" type="checkbox"
+                                                    [checked]="updateqrecords?.answer2">
+                                                <label class="form-check-label">Choice 2</label>
+                                            </div>
+                                            <div class="form-check form-check-inline"
+                                                ngModel="{{updateqrecords?.answer3}}">
+                                                <input class="form-check-input" ngModel name="answer3" type="checkbox"
+                                                    [checked]="updateqrecords?.answer3">
+                                                <label class="form-check-label">Choice 3</label>
+                                            </div>
+                                            <div class="form-check form-check-inline"
+                                                ngModel="{{updateqrecords?.answer4}}">
+                                                <input class="form-check-input" ngModel name="answer4" type="checkbox"
+                                                    [checked]="updateqrecords?.answer4">
+                                                <label class="form-check-label">Choice 4</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button (click)="onUpdateqRecords(editForm.value)" data-bs-dismiss="modal"
+                                class="btn btn-success">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of Update Question Record -->
+
+
+    <!-- Delete Question Record -->
+
+    <div class="modal fade" id="deleteQuestionRecordsModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        Are you sure want to delete this Question <b>"{{deleteqrecords?.question}}"</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary shadow" data-bs-dismiss="modal">Cancel</button>
+                        <button (click)="onDeleteqRecords(deleteqrecords!.id)" data-bs-dismiss="modal"
+                            class="btn btn-danger shadow"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of Delete Question Record -->
+
+</div>
+
+<!-- loading spinner -->
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

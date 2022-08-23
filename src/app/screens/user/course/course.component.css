@@ -1,0 +1,8 @@
+.shadow {
+    transition: all 0.2s ease;
+    cursor: pointer
+}
+
+.shadow:hover {
+    transform: scale(1.1)
+}

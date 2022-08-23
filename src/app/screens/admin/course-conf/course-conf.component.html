@@ -1,0 +1,71 @@
+<div class="row text-end">
+    <div class="col-md-6 offset-md-6 col-9 offset-1">
+        <button type="button" class="btn btn-success text-center " data-bs-toggle="modal"  routerLink="/admin/content-page">
+            <i class="fa-solid fa-plus"></i>&nbsp;&nbsp;New
+            Course</button>
+    </div>
+</div>
+<!-- <div class="row col-md-4 offset-md-8 col-8 offset-3" *ngIf="contentRecords?.length>0">
+    <div class="input-group">
+        <input type="search" #key="ngModel" ngModel (ngModelChange)="searchContnetRecords(key.value)" name="key" id="form1"
+            class="form-control" placeholder="Search Employee Here....." />
+        <button type="button" class="btn btn-dark">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</div> -->
+
+<div class="row mt-3">
+    <div class="col-md-12 col-11 text-center">
+        <div *ngIf="contentRecords?.length == 0">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">No Contents!</h4>
+                <p>No Contnets were found.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Record Details -->
+ 
+<div class="row mt-5 text-center">
+    <div class="col-md-3" *ngFor="let contents  of contentRecords">
+        <div class="shadow p-5 bg-white rounded mb-5" (click)="getContentRecordDetails(contents.id)">{{contents.title}}</div>
+    </div>
+</div>
+
+<!-- End of Content Record Details -->
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Yor New Course Here</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Course Name</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success"><i
+                        class="fa-solid fa-check"></i>&nbsp;&nbsp;Create</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

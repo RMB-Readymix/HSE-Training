@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="card instructioncard">
+        <div class="card-body">
+            <h5 class="card-title text-center">Instructions</h5>
+            <ul>
+                <li>The quizzes consists of questions carefully designed to help you self-assess your comprehension
+                    of the information presented on the topics covered in the module. No data will be collected on
+                    the website regarding your responses or how many times you take the quiz.</li>
+                <li>Each question in the quiz is of multiple-choice or "true or false" format. Read each question
+                    carefully, and click on the button next to your response that is based on the information
+                    covered on the topic in the module. Each correct or incorrect response will result in
+                    appropriate feedback immediately at the bottom of the screen.</li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="text-end">
+        <button class="btn btn-dark mt-2" (click)="getContentRecordDetails(contentRecords.id)">Start Assessment</button>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="dodgerblue" type="ball-clip-rotate">
+    <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
+    </div>
+</ngx-spinner>

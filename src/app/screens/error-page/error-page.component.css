@@ -1,0 +1,14 @@
+.error-message{
+    position: relative;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+}
+
+h1{
+    color: red;
+}
+
+p{
+    line-height: 5px;
+}

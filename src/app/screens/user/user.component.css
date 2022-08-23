@@ -1,0 +1,18 @@
+a{
+    text-decoration: none;
+}
+
+.nav-link{
+    color: #c1c1c1;
+    
+}
+
+.nav-link:hover{
+    color: white;
+    
+}
+
+
+.nav {
+    height: 100%;
+  }
