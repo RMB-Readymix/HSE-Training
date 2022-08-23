@@ -29,7 +29,6 @@
             </tr>
         </tbody>
     </table>
-    <button style="width:100%;" class="btn btn-success" printSectionId="print-section" ngxPrin printTitle="Task Report">Print Report</button>
 </div>
 
 <div class="modal fade" id="deleteTaskRecordsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -46,6 +45,80 @@
                 <button class="btn btn-danger shadow" data-bs-dismiss="modal"
                     (click)="onDeleteUserRecord(deleteTaskRecords!.id)"><i
                         class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-end">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Generate Report
+    </button>
+</div>
+
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div id="print-section" class="main">
+                <div class="modal-header">
+                    <button class="btn btn-success" printSectionId="print-section" ngxPrint [useExistingCss]="true"
+                    printTitle="Task Report">Print Report</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col center-title">
+
+                            <img src="assets/images/rmbFormHeader.png" alt="rmb form header">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-md-12 center-title">
+
+                            <h1>Task Report</h1>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <table class="table">
+                            <thead class="table-dark" *ngIf="taskRecords.length > 0">
+                                <tr>
+                                    <th scope="col">Sl.No</th>
+                                    <th scope="col">Employee Name</th>
+                                    <th scope="col">Course Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Assingned Date</th>
+                                    <th scope="col">End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let task of taskRecords, let i=index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{task.employeeName}}</td>
+                                    <td>{{task.courseName}}</td>
+                                    <td><span class="badge bg-success">{{task.taskStatus}}</span></td>
+                                    <td>{{task.assignedDate}}</td>
+                                    <td>{{task.endDate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

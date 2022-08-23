@@ -37,7 +37,7 @@ import { InstructionsComponent } from './screens/user/instructions/instructions.
 import { UserDashboardComponent } from './screens/user/user-dashboard/user-dashboard.component';
 import { IndInfoComponent } from './screens/admin/ind-info/ind-info.component';
 import { AssessmentInfoComponent } from './screens/admin/assessment-info/assessment-info.component';
-
+import { NgxPrintModule } from 'ngx-print';
 
 
 @NgModule({
@@ -84,6 +84,7 @@ import { AssessmentInfoComponent } from './screens/admin/assessment-info/assessm
     NgxSpinnerModule,
     HttpClientModule,
     MatDialogModule,
+    NgxPrintModule,
     RouterModule.forRoot(routes, { useHash: true }),
   ],
   providers: [],

@@ -26,6 +26,7 @@
     "jquery": "^3.6.0",
     "ng2-pdf-viewer": "^9.0.0",
     "ngx-doc-viewer": "^2.1.2",
+    "ngx-print": "^1.2.1",
     "ngx-quill": "^16.2.1",
     "ngx-spinner": "^13.1.1",
     "rxjs": "~7.5.0",
