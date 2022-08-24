@@ -4,31 +4,49 @@
   <h3>Please see your Assessment details below.</h3>
 </div>
 
-<table class="table table-dark">
+<div class="card mt-2 mb-3">
+  <h5 class="card-header text-center">Course Name - Course Name</h5>
+  <div class="card-body">
+    <h4 class="card-title text-muted text-center mb-2">Out of &nbsp;&nbsp;<button
+        class="btn btn-primary btn-sm">10</button>&nbsp;&nbsp; questions you answered &nbsp;&nbsp;<button
+        class="btn btn-success btn-sm">8</button></h4>
+    <h4 class="font-weight-bold text-center">Congratulations You Have Successfully Completed <span
+        class="text-success"><b>&nbsp; Office Training</b></span></h4>
+    <div class="text-center">
+      <button class="btn btn-success text-center"><b><i class="fa-solid fa-circle-check"></i>&nbsp;
+          Completed</b></button>
+      OR
+      <button class="btn btn-danger text-center"><b><i class="fa-solid fa-circle-xmark"></i>&nbsp;
+          Incomplete</b></button>
+    </div>
+  </div>
+</div>
+
+<table class="table  table-dark table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+        <th scope="col-md-1">#</th>
+        <th scope="col-md-5">Question</th>
+        <th scope="col-md-3">Your Answer</th>
+        <th scope="col-md-3">Actual Answer</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
+      <td>Question 1</td>
       <td>Otto</td>
       <td>@mdo</td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>Jacob</td>
+      <td>Question 2</td>
       <td>Thornton</td>
       <td>@fat</td>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td>Larry</td>
+      <td>Question 3</td>
       <td>the Bird</td>
       <td>@twitter</td>
     </tr>
@@ -47,10 +65,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button class="btn btn-success" printSectionId="print-section" ngxPrint [useExistingCss]="true"
-            printTitle="Task Report">Print Report</button>
+            printTitle="Certificate">Print Report</button>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div id="print-section shadow" class="main mt-5 ">
+        <div id="print-section" class="main">
           <div class="container ">
 
             <div class="row">
@@ -90,7 +108,7 @@
               <div class="col-md-2 offset-md-1">
                 <img src="assets/images/seal.png" height="70px" alt="rmb form header">
               </div>
-              <div class="col-md-2 offset-md-6" >
+              <div class="col-md-2 offset-md-6">
                 <b>19-08-2022</b>
                 <hr>
               </div>
@@ -110,3 +128,4 @@
     <div class="spinner-border" style="width: 7rem; height: 7rem; color: white;" role="status">
     </div>
   </ngx-spinner>
+  <span class="badge badge-pill badge-dark">Dark</span>

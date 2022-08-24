@@ -45,6 +45,7 @@ export var  routes: Routes = [
       { path: 'instructions', component:InstructionsComponent },
       { path: 'instructions/:id', component:InstructionsComponent },
       { path: 'score', component:ScoreComponent },
+      { path: 'score/:id', component:ScoreComponent },
     ], 
   },
   {
