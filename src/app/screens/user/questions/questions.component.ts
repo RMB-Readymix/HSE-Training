@@ -17,7 +17,8 @@ export class QuestionsComponent implements OnInit {
 
   public qrecords: QuestionRecords[] | any;
   public id: number | any;
-  public contentRecords: ContentRecords | any;
+  public contentRecords: ContentRecords[] | any;
+  public qrecordsCount : QuestionRecords[] | any;
 
   secondsLeft: number = 10;
   minutesLeft: number = 0;
@@ -35,29 +36,6 @@ export class QuestionsComponent implements OnInit {
     this.getqRecords();
     this.getContenRecords()
     console.log(this.qrecords)
-    this.startTimer()
-  }
-
-
-  startTimer() {
-
-    this.secondsLeft = 10;
-    this.minutesLeft = 0;
-    this.interval = setInterval(() => {
-      if (this.minutesLeft <= 0 && this.secondsLeft <= 0) {
-        this.ngxSpinner.show()
-        this.goToScore()
-        this.ngxSpinner.hide()
-      }
-      else {
-        if (this.secondsLeft > 0) {
-          this.secondsLeft--;
-        } else {
-          this.secondsLeft = 60;
-          this.minutesLeft--;
-        }
-      }
-    }, 1000);
   }
 
   goToScore(){
@@ -90,8 +68,29 @@ export class QuestionsComponent implements OnInit {
   }
 
    getContentRecordDetails(id:number){
-    this.router.navigate(['/user/questions',id]);
+    this.router.navigate(['/user/score',id]);
     // this.router.navigate(['/admin/course-edit',id]);
   }
+
+  // startTimer() {
+
+  //   this.secondsLeft = 10;
+  //   this.minutesLeft = 0;
+  //   this.interval = setInterval(() => {
+  //     if (this.minutesLeft <= 0 && this.secondsLeft <= 0) {
+  //       this.ngxSpinner.show()
+  //       this.goToScore()
+  //       this.ngxSpinner.hide()
+  //     }
+  //     else {
+  //       if (this.secondsLeft > 0) {
+  //         this.secondsLeft--;
+  //       } else {
+  //         this.secondsLeft = 60;
+  //         this.minutesLeft--;
+  //       }
+  //     }
+  //   }, 1000);
+  // }
 
 }

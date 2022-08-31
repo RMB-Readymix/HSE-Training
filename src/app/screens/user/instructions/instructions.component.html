@@ -1,11 +1,10 @@
 <div class="row">
-    <div class="card instructioncard">
+    <div class="card instructioncard col-md-12 col-10">
         <div class="card-body">
             <div class="alert alert-success text-center" role="alert">
                 <h4>Instructions</h4>
             </div>
             <h5 class="text-center"><b>{{contentRecords.title}}</b></h5>
-            <p class="text-end font-weight-bold"><b>Time :</b> <span class="text-danger"><b>10 mins</b></span></p>
             <p class="text-center text-muted">Please read the instructions carefully before you attend the Assessment.
             </p>
             <ul class="">
@@ -20,7 +19,7 @@
 
         </div>
     </div>
-    <div class="text-end">
+    <div class="text-end col-md-12 col-10">
         <button class="btn btn-dark mt-2" (click)="getContentRecordDetails(contentRecords.id)">Start Assessment</button>
     </div>
 </div>

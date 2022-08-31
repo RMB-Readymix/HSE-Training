@@ -9,4 +9,6 @@ export class TaskRecord {
  assignedDate : string = '';
  endDate : string = '';
  employeeEmail : string = '';
+ employee : string = '';
+ course : string = '';
 }

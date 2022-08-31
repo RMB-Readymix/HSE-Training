@@ -1,7 +1,28 @@
 <div id="main-container">
-    <div class="alert text-center alert-warning"> <span class="h5 bold font-weight-bold">Task Management </span> </div>
+    <div class="alert text-center alert-warning "> <span class="h5 bold font-weight-bold">Task Management </span> </div>
     <div class="alert text-center alert-secondary" *ngIf="taskRecords == 0"> <span class="h5 bold font-weight-bold">No
             Assigned Tasks Found..!</span> </div>
+    <div class="row mb-3" *ngIf="taskRecords.length > 0">
+        <div class="col-md-5">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Find by all</option>
+                <option value="1">Find by epartment</option>
+                <option value="2">Find by assigned date</option>
+                <option value="3">Find by end date</option>
+              </select>
+        </div>
+        <div class="col-md-5">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>None</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-success shadow"> Get Results</button>
+        </div>
+    </div>
     <table class="table">
         <thead class="table-dark" *ngIf="taskRecords.length > 0">
             <tr>
@@ -17,9 +38,9 @@
         <tbody>
             <tr *ngFor="let task of taskRecords, let i=index">
                 <th scope="row">{{i+1}}</th>
-                <td>{{task.employeeName}}</td>
-                <td>{{task.courseName}}</td>
-                <td><span class="badge bg-success">{{task.taskStatus}}</span></td>
+                <td>{{task.employee}}</td>
+                <td>{{task.course}}</td>
+                <td><span class="badge bg-success shadow">{{task.taskStatus}}</span></td>
                 <td>{{task.assignedDate}}</td>
                 <td>{{task.endDate}}</td>
                 <td>
@@ -30,6 +51,33 @@
         </tbody>
     </table>
 </div>
+
+<div class="text-end mb-3">
+    <button *ngIf="taskRecords.length > 0" type="button" class="btn btn-primary shadow" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        Generate Report
+    </button>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Modals -->
 
 <div class="modal fade" id="deleteTaskRecordsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
     role="dialog">
@@ -49,11 +97,6 @@
         </div>
     </div>
 </div>
-<div class="text-end">
-    <button *ngIf="taskRecords.length > 0"F type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Generate Report
-    </button>
-</div>
 
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
@@ -67,31 +110,18 @@
                 <div class="container">
 
                     <div class="row">
-
                         <div class="col center-title">
-
                             <img src="assets/images/rmbFormHeader.png" alt="rmb form header">
-
                         </div>
-
                     </div>
-
                 </div>
-
                 <div class="container">
-
                     <div class="row">
-
                         <div class="col-md-12 center-title">
-
                             <h1>Task Report</h1>
-
                         </div>
-
                     </div>
-
                 </div>
-
                 <div class="container">
                     <div class="row">
                         <table class="table">
@@ -108,8 +138,8 @@
                             <tbody>
                                 <tr *ngFor="let task of taskRecords, let i=index">
                                     <th scope="row">{{i+1}}</th>
-                                    <td>{{task.employeeName}}</td>
-                                    <td>{{task.courseName}}</td>
+                                    <td>{{task.employee}}</td>
+                                    <td>{{task.course}}</td>
                                     <td><span class="badge bg-success">{{task.taskStatus}}</span></td>
                                     <td>{{task.assignedDate}}</td>
                                     <td>{{task.endDate}}</td>
@@ -118,7 +148,6 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

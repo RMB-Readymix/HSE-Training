@@ -55,8 +55,8 @@ export class IndTrainingComponent implements OnInit {
     this.hseService.setTaskRecord(addForm.value).subscribe(
       (response: TaskRecord) => {
         var messageTemplate = new MessageTemplate();
-        messageTemplate.header = "Hi " + response.employeeName + ",";
-        messageTemplate.body = "You " + "have been Assigned " + response.courseName + " with Completion Date " + response.endDate + "\nPlease Complete Assigned Task before Due Date.\n";
+        messageTemplate.header = "Hi " + response.employee + ",";
+        messageTemplate.body = "You " + "have been Assigned " + response.course + " with Completion Date " + response.endDate + "\nPlease Complete Assigned Task before Due Date.\n";
         this.ngOnInit();
         this.sendMailNotification(response.employeeEmail, messageTemplate);
         this.successService.openDialog('Task Assigned Succesfully');

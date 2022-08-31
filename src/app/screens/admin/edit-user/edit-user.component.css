@@ -18,4 +18,20 @@ a{
     text-decoration: none;
 }
 
+.center-title img{
+    background-size: contain;
+    width: 85%;
+    margin-bottom: 15px;
+}
+
+.center-title{
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+.center-title h1{
+    font-weight: bold;
+    font-size: 21px;
+}
+
 

@@ -1,23 +1,22 @@
-<div class="text-center">
+<div class="text-center col-md-12 col-10">
   <i class="fa-solid fa-circle-check text-success fa-7x"></i>
   <h1 class="text-muted mt-3"><b>Thank You !</b></h1>
   <h3>Please see your Assessment details below.</h3>
 </div>
 
-<div class="card mt-2 mb-3">
-  <h5 class="card-header text-center">Course Name - Course Name</h5>
+
+
+<div class="card mt-2 mb-3 col-md-12 col-11">
+  <h5 class="card-header text-center">Training Name - <b>{{contentRecords.title}}</b></h5>
   <div class="card-body">
     <h4 class="card-title text-muted text-center mt-2">Out of &nbsp;&nbsp;<button
         class="btn btn-primary btn-sm">10</button>&nbsp;&nbsp; questions you answered &nbsp;&nbsp;<button
         class="btn btn-success btn-sm">8</button></h4>
     <h4 class="font-weight-bold text-center mt-2">Congratulations You Have Successfully Completed <span
-        class="text-success"><b>&nbsp; Office Training</b></span></h4>
+        class="text-success"><b>&nbsp; {{contentRecords.title}}</b></span></h4>
     <div class="text-center mt-2 mb-2">
       <button class="btn btn-success text-center"><b><i class="fa-solid fa-circle-check"></i>&nbsp;
           Completed</b></button>
-      OR
-      <button class="btn btn-danger text-center"><b><i class="fa-solid fa-circle-xmark"></i>&nbsp;
-          Incomplete</b></button>
     </div>
   </div>
 </div>
@@ -25,30 +24,26 @@
 <table class="table  table-dark table-hover">
   <thead>
     <tr>
-        <th scope="col-md-1">#</th>
-        <th scope="col-md-5">Question</th>
-        <th scope="col-md-3">Your Answer</th>
-        <th scope="col-md-3">Actual Answer</th>
+      <th scope="col">#</th>
+      <th scope="col">Question</th>
+      <th scope="col">Choice 1</th>
+      <th scope="col">Choice 2</th>
+      <th scope="col">Choice 3</th>
+      <th scope="col">Choice 4</th>
+      <th scope="col">Your Answer</th>
+      <th scope="col">Actual Answer</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Question 1</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Question 2</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Question 3</td>
-      <td>the Bird</td>
-      <td>@twitter&nbsp;</td>
+    <tr *ngFor="let qrecord of qrecords,let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td scope="row">{{qrecord?.question}}</td>
+        <td scope="row">{{qrecord?.choice1}}</td>
+        <td scope="row">{{qrecord?.choice2}}</td>
+        <td scope="row">{{qrecord?.choice3}}</td>
+        <td scope="row">{{qrecord?.choice4}}</td>
+        <th scope="row">Null</th>
+        <td scope="row" *ngIf="qrecord?.answer1 || qrecord?.answer2 || qrecord?.answer3 || qrecord?.answer4"> <i class="fa-solid fa-circle-check text-success"></i>&nbsp;&nbsp; {{qrecord?.answer1 || qrecord?.answer2 || qrecord?.answer3 || qrecord?.answer4}}</td>
     </tr>
   </tbody>
 </table>
@@ -68,7 +63,7 @@
             printTitle="Certificate">Print Report</button>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div id="print-section" class="main">
+        <div id="print-section" class="main mt-5">
           <div class="container ">
 
             <div class="row">
@@ -89,10 +84,10 @@
 
               <div class="col-md-12 center-title">
 
-                <h1 style="text-transform:uppercase;"><b>Office Training</b></h1>
+                <h1 style="text-transform:uppercase;"><b>{{contentRecords.title}}</b></h1>
 
                 <p>This certificae is hereby presented to</p>
-                <h2> <b>Ibrahim Khaleel</b></h2>
+                <h2> <b>{{userData.name}}</b></h2>
                 <p>Has hereby successfully completed Office Training program</p>
 
               </div>

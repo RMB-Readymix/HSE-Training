@@ -1,7 +1,7 @@
 <!-- Content Record Details -->
 
 <div class="row mt-5 text-center">
-    <div class="col-md-3" *ngFor="let task of taskRecords">
+    <div class="col-md-3 col-11" *ngFor="let task of taskRecords">
         <div *ngFor="let contents  of contentRecords">
             <div *ngIf="contents.id == task.courseId">
                 <div class="shadow p-5 bg-white border border-warning border-2 rounded mb-5"

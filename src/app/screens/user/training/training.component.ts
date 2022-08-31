@@ -17,6 +17,7 @@ export class TrainingComponent implements OnInit {
 
   public id: number | any;
   public contentRecords: ContentRecords | any;
+  public filteredContent: ContentRecords | any;
   public backendUrl = GlobalVariables.backendUrl;
 
   constructor(
@@ -34,6 +35,11 @@ export class TrainingComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.hseService.geContnetRecordById(this.id).subscribe((data) => {
       this.contentRecords = data;
+      this.filteredContent = data.docs.filter(
+        (doc) =>
+          (doc.fileType == 'image/jpeg' || doc.fileType == 'image/png') &&
+          doc.fileName !== 'headerimage.jpg'
+      );
       console.log('data',data)
     });
   }
